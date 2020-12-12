@@ -29,6 +29,7 @@ if __name__ == '__main__':
 	direction_list[0] = direction_list[0].replace("Advertisement", "")
 
 	# Print recipe to console
+    """
 	print("\n", recipe_title)
 	print("_" * len(recipe_title))
 	print("Ingredients\n")
@@ -38,3 +39,4 @@ if __name__ == '__main__':
 	print("Directions\n")
 	for direction in direction_list:
 		print("  ", direction, "\n")
+"""
