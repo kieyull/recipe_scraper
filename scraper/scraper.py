@@ -23,10 +23,6 @@ class Scraper:
         self.ingredients = []
         self.directions = []
 
-    def dataToList(self, data: bs4.element.ResultSet) -> list:
-        """ Takes a ResultSet from BeautifulSoup and turns it into a list of strings """
-        return [re.sub(r"\s\s+", " ", i.text).strip().rstrip() for i in data]
-
     def getTitle(self, dom: bs4.element.ResultSet) -> str:
         """ Removes the domain name from the title as well as 'Recipe if it's there """
         title = dom.title.text
@@ -36,6 +32,10 @@ class Scraper:
         title = title.split(" – ")[0]
         title = title.split(" — ")[0]
         return title.lower().replace("recipe", "").title().strip()
+
+    def dataToList(self, data: bs4.element.ResultSet) -> list:
+        """ Takes a ResultSet from BeautifulSoup and turns it into a list of strings """
+        return [re.sub(r"\s\s+", " ", i.text).strip().rstrip() for i in data]
 
     def getDomain(self, url: str) -> str:
         """ Takes the full url and returns just the domain name with no subdomain """
