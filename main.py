@@ -8,11 +8,11 @@
 6. insert into database
 """
 import sys
-import scraper.scraper as scraper
+import lib.scraper as scraper
 
 # Url examples
 urls = [
-    'https://www.thechunkychef.com/epic-dry-rubbed-baked-chicken-wings/',
+    'https://www.thechunkychef.com/epic-dry-rubbed-baked-chicken-wings/', #WP
     'https://www.allrecipes.com/recipe/276771/air-fryer-balsamic-glazed-chicken-wings/',
     'https://www.foodnetwork.com/recipes/ellie-krieger/greek-style-stuffed-peppers-recipe-1946946',
     'https://www.yummly.com/recipe/Crawfish-Etouffee-2670864',
@@ -26,12 +26,12 @@ urls = [
 
 if __name__ == '__main__':
     """
-                if len(sys.argv) == 2:
+    if len(sys.argv) == 2:
         url = sys.argv[1]
     else:
         url = "https://www.allrecipes.com/recipe/276771/air-fryer-balsamic-glazed-chicken-wings/"
-                """
+    """
 
     for url in urls:
-        recipe_data = scraper.Scraper(url)
-        print(recipe_data.title)
+        recipe_data = scraper.Scrape(url)
+        

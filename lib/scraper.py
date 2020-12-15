@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 
 
-class Scraper:
+class Scrape:
     """ Base class to be extended and used for other domains
 
     This class grabs a domain and pulls in the html. 
@@ -17,20 +17,20 @@ class Scraper:
 
     def __init__(self, url: str) -> None:
         self.url = url
-        self.html = BeautifulSoup(requests.get(url).content, "html.parser")
+        self.html = requests.get(url).content
+        self.soup = BeautifulSoup(self.html, "html.parser")
         self.domain = self.getDomain(url)
-        self.title = self.getTitle(self.html)
+        self.title = self.getTitle(self.soup)
         self.ingredients = []
         self.directions = []
 
     def getTitle(self, dom: bs4.element.ResultSet) -> str:
         """ Removes the domain name from the title as well as 'Recipe if it's there """
+        delineators = [" by ", " | ", " - ", " – ", " — "]
         title = dom.title.text
-        title = title.split(" by ")[0]
-        title = title.split(" | ")[0]
-        title = title.split(" - ")[0]
-        title = title.split(" – ")[0]
-        title = title.split(" — ")[0]
+        for delineator in delineators:
+            title = title.split(delineator)[0]
+
         return title.lower().replace("recipe", "").title().strip()
 
     def dataToList(self, data: bs4.element.ResultSet) -> list:
