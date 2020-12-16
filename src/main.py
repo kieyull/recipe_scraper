@@ -9,10 +9,20 @@
 """
 import sys
 import lib.scraper as scraper
+from peewee import *
+
+mysql_db = MySQLDatabase('recipes', user='app', password='password',
+                         host='localhost', port=3306)
+
+# ingredient_list = dataToList(soup.find_all(class_="ingredients-item-name"))
+# direction_list = dataToList(soup.find_all(class_="instructions-section-item"))
+
+# # AllRecipes.com has advertising included in the first direction div
+# direction_list[0] = direction_list[0].replace("Advertisement", "")
 
 # Url examples
 urls = [
-    'https://www.thechunkychef.com/epic-dry-rubbed-baked-chicken-wings/', #WP
+    'https://www.thechunkychef.com/epic-dry-rubbed-baked-chicken-wings/',  # WP
     'https://www.allrecipes.com/recipe/276771/air-fryer-balsamic-glazed-chicken-wings/',
     'https://www.foodnetwork.com/recipes/ellie-krieger/greek-style-stuffed-peppers-recipe-1946946',
     'https://www.yummly.com/recipe/Crawfish-Etouffee-2670864',
@@ -34,4 +44,3 @@ if __name__ == '__main__':
 
     for url in urls:
         recipe_data = scraper.Scrape(url)
-        
